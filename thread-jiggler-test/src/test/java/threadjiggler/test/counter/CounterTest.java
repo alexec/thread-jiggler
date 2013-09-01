@@ -12,7 +12,7 @@ import static junit.framework.TestCase.assertEquals;
  */
 public abstract class CounterTest {
 	Counter counter;
-	int n = 1000000;
+	int n = 1000;
 
 	@Test
 	public void singleThreadedTest() throws Exception {
