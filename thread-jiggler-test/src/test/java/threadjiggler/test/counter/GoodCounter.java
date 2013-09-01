@@ -1,4 +1,4 @@
-package threadjiggler.test;
+package threadjiggler.test.counter;
 
 import net.jcip.annotations.ThreadSafe;
 

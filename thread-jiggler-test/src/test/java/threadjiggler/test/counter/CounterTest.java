@@ -1,6 +1,7 @@
-package threadjiggler.test;
+package threadjiggler.test.counter;
 
 import org.junit.Test;
+import threadjiggler.test.Threads;
 
 import java.util.concurrent.Callable;
 

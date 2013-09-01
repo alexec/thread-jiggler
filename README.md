@@ -1,9 +1,13 @@
 [![Build Status](https://api.travis-ci.org/alexec/thread-jiggler.png)](https://travis-ci.org/alexec/thread-jiggler)
 Thread Jiggeling
 ====
+Overview
+---
+Thread jiggler is a simple testing framework for exercising code to find threading problems. It works by modifying classes bytecode at runtime to insert Thread.yield() calls between instructions - "jiggling" the threads. This greatly increases the likelihood of discovering threading issues, and does it without you needing to change your production code.
+ 
 Background
 ---
-I was recently researching how to test multithreaded code for threading issues, and found out about a tool from IBM Haifa hard to Google name of ConTest, but couldn't find any useful implementations. So naturally, I thought I'd spike my own.
+I was recently researching how to test multithreaded code for threading issues, and found out about a tool from IBM called [ConTest](http://www.almaden.ibm.com/laborday/haifa/projects/verification/contest/index.html), but couldn't find any code I could use myself. So naturally, I thought I'd spike my own.
 
 Consider this canonical simple, but thread unsafe class:
 
@@ -75,7 +79,7 @@ Just 0.04% of the tests had a problem. What have we learned? We've learned a sim
 
 Thread Jiggling
 ---
-So one problem exercising code to find threading defects is that you can't control when thread will yield. However, we can re-write the bytecode to insert Thread.yield() into the bytecode between instructions. For example, in the above example we can get the code to produce more issues by changing the bytecode:
+So one problem exercising code to find threading defects is that you can't control when threads will yield. However, we can re-write the bytecode to insert Thread.yield() into the bytecode between instructions. For example, in the above example we can get the code to produce more issues by changing the bytecode:
 
     ALOAD 0
     DUP
@@ -101,10 +105,16 @@ Now running the test:
 
 The number of test where we see the threading problem jump to 16%. We've done this with out any recompilation of the code, or impacting on other unit tests running in the same JVM.
 
+Example
+---
+SimpleDateFormat is a well know, non-thread safe class in Java.
 
+
+The code for this can be [found on Github](https://github.com/alexec/thread-jiggler).
 
 Further Reading
 ---
 * [Java Concurrency](ftp://ftp.cs.umanitoba.ca/pub/IPDPS03/DATA/W20_PADTD_02.PDF)
 * [Concurrent Bug Patterns and How to Test Them - Eitan Farchi, Yarden Nir, Shmuel Ur IBM Haifa Research Labs](ftp://ftp.cs.umanitoba.ca/pub/IPDPS03/DATA/W20_PADTD_02.PDF)
 * [A presentation describing the difficulty of testing and debugging concurrent software - Shmuel Ur](http://www.almaden.ibm.com/laborday/haifa/projects/verification/contest/papers/testingConcurrentJune2008ForMS.pdf)
+* [Java theory and practice: Characterizing thread safety](http://www.ibm.com/developerworks/java/library/j-jtp09263/index.html)

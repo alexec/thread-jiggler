@@ -1,4 +1,4 @@
-package threadjiggler.test;
+package threadjiggler.test.counter;
 
 /**
  * @author alexec (alex.e.c@gmail.com)

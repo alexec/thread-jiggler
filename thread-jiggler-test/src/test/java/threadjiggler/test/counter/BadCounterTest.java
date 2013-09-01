@@ -1,14 +1,16 @@
-package threadjiggler.test;
+package threadjiggler.test.counter;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import threadjiggler.test.Jiggle;
+import threadjiggler.test.JigglingRunner;
 
 /**
  * @author alexec (alex.e.c@gmail.com)
  */
 @RunWith(JigglingRunner.class)
-@Jiggle("threadjiggler.test.*")
+@Jiggle("threadjiggler.test.counter.*")
 public class BadCounterTest extends CounterTest {
 
 	@Before
