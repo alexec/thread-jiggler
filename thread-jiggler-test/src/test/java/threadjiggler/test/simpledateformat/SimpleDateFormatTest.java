@@ -46,7 +46,7 @@ public class SimpleDateFormatTest {
 		}
 	}
 
-	@Test
+	@Test(expected=AssertionError.class)
 	public void multiThreaded() throws Throwable {
 
 		try {
