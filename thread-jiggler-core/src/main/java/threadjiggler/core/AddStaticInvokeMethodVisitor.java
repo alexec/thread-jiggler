@@ -4,6 +4,8 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 /**
+ * Add a invocation of a static method after selected instructions.
+ *
  * @author alexec (alex.e.c@gmail.com)
  */
  class AddStaticInvokeMethodVisitor extends MethodVisitor implements Opcodes {
@@ -26,14 +28,17 @@ import org.objectweb.asm.Opcodes;
 		if (debug) {
 			System.out.printf("FieldInsn %s,%s,%s,%s\n", opcode, owner, name, desc);
 		}
+
 		super.visitFieldInsn(opcode, owner, name, desc);
+		super.visitMethodInsn(INVOKESTATIC, this.owner, this.name, this.desc);
+	}
 
+	@Override
+	public void visitMethodInsn(int opcode, String owner, String name, String desc) {
 		if (debug) {
-			super.visitFieldInsn(GETSTATIC, "java/lang/System", "out", "Ljava/io/PrintStream;");
-			super.visitLdcInsn(String.format("%s,%s,%s", owner,name,desc));
-			super.visitMethodInsn(INVOKEVIRTUAL, "java/io/PrintStream", "println", "(Ljava/lang/String;)V");
+			System.out.printf("MethodInsn %s,%s,%s,%s\n", opcode, owner, name, desc);
 		}
-
+		super.visitMethodInsn(opcode, owner, name, desc);
 		super.visitMethodInsn(INVOKESTATIC, this.owner, this.name, this.desc);
 	}
 }

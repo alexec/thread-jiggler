@@ -4,6 +4,8 @@ import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.MethodVisitor;
 
 /**
+ * Add an invocation of a static method between certain instructions.
+ *
  * @author alexec (alex.e.c@gmail.com)
  */
  class AddStaticInvokeClassVisitor extends ClassVisitor {
