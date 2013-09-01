@@ -28,7 +28,7 @@ The count method's byte code is:
     IADD
     PUTFIELD asm/Foo.counter : I
 
-This provides several places where calls context switch can mean that the count is not atomic. But how can you test this? Let consider a quick unit test:
+This provides several places where there could be a context switch, which means that count my be increased, but not stored as expected. Let consider a quick unit test:
 
 	public class BadCounterTest {
 	    Counter counter = new BadCounter();
@@ -45,7 +45,7 @@ This provides several places where calls context switch can mean that the count 
         }
         ...
 
-OK, so this test runs in a single thread, and passes. Lets try and run this on two threads to try and see if it fails.
+This test runs in a single thread, and passes. Lets try and run this on two threads and see if it fails.
 
         @Test
         public void threadedTest() throws Exception {
@@ -69,7 +69,7 @@ OK, so this test runs in a single thread, and passes. Lets try and run this on t
             assertEquals(n, counter.getCount());
          }
 
-This also passes. In fact, on my computer I can increase n to 100,000 before I have any failures.
+This also passes. On my computer I can increase _n_ to 100,000 before it starts to fail consistently.
 
     junit.framework.AssertionFailedError:
     Expected :1000000
@@ -79,7 +79,7 @@ Just 0.04% of the tests had a problem. What have we learned? We've learned a sim
 
 Thread Jiggling
 ---
-So one problem exercising code to find threading defects is that you can't control when threads will yield. However, we can re-write the bytecode to insert Thread.yield() into the bytecode between instructions. For example, in the above example we can get the code to produce more issues by changing the bytecode:
+So one problem exercising code to find threading defects is that you can't control when threads will yield. However, we can re-write the bytecode to insert Thread.yield() into the bytecode between instructions. In the above example we can get the code to produce more issues by changing the bytecode:
 
     ALOAD 0
     DUP
@@ -89,7 +89,7 @@ So one problem exercising code to find threading defects is that you can't contr
     IADD
     PUTFIELD asm/Foo.counter : I
 
-Using ASM, we can create a rewriter to insert these invocations. JigglingClassLoader re-writes classes on the fly, adding these calls. From this we can create a JUnit runner to run use the new class loader for the test.
+Using ASM, we can create a rewriter to insert these invocations. The JigglingClassLoader re-writes classes on the fly, adding these calls. From this we can create a JUnit runner to run use the new class loader for the test.
 
     @RunWith(JigglingRunner.class)
     @Jiggle("threadjiggler.test.*")
@@ -109,7 +109,8 @@ Exercise for the Reader
 ---
 SimpleDateFormat is a well know, non-thread safe class in Java. Write a test that jiggles the class. Why is it not thread-safe? How would you rewrite it so that it was thread safe? How can you do so without using a ThreadLocal, locks or synchronisation?
 
-
+Source Code
+---
 The code for this can be [found on Github](https://github.com/alexec/thread-jiggler).
 
 Further Reading
