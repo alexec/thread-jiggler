@@ -1,4 +1,4 @@
-[![Build Status](https://api.travis-ci.org/alexec/thead-jiggler.png)](https://travis-ci.org/alexec/thread-jiggler)
+[![Build Status](https://api.travis-ci.org/alexec/thread-jiggler.png)](https://travis-ci.org/alexec/thread-jiggler)
 Thread Jiggeling
 ====
 Background
