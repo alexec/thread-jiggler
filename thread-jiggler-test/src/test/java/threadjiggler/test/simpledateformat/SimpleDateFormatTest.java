@@ -1,7 +1,9 @@
 package threadjiggler.test.simpledateformat;
 
 import org.junit.Test;
+import org.junit.runner.RunWith;
 import threadjiggler.test.Jiggle;
+import threadjiggler.test.JigglingRunner;
 import threadjiggler.test.Threads;
 
 import java.text.SimpleDateFormat;
@@ -15,7 +17,7 @@ import static org.junit.Assert.assertEquals;
 /**
  * @author alexec (alex.e.c@gmail.com)
  */
-//@RunWith(JigglingRunner.class)
+@RunWith(JigglingRunner.class)
 @Jiggle("threadjiggler.test.counter.*")
 public class SimpleDateFormatTest {
 	Date[] dates = new Date[3];

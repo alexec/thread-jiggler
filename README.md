@@ -105,9 +105,9 @@ Now running the test:
 
 The number of test where we see the threading problem jump to 16%. We've done this with out any recompilation of the code, or impacting on other unit tests running in the same JVM.
 
-Example
+Exercise for the Reader
 ---
-SimpleDateFormat is a well know, non-thread safe class in Java.
+SimpleDateFormat is a well know, non-thread safe class in Java. Write a test that jiggles the class. Why is it not thread-safe? How would you rewrite it so that it was thread safe? How can you do so without using a ThreadLocal, locks or synchronisation?
 
 
 The code for this can be [found on Github](https://github.com/alexec/thread-jiggler).
