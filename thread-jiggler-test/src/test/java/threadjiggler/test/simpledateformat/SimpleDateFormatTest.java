@@ -8,6 +8,7 @@ import threadjiggler.test.Threads;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutionException;
@@ -34,7 +35,7 @@ public class SimpleDateFormatTest {
 		formatted[2] = "07/02/12 02:04";
 	}
 
-	SimpleDateFormat format = new SimpleDateFormat();
+	SimpleDateFormat format = new SimpleDateFormat("dd/MM/YY hh:mm", Locale.ENGLISH);
 	Random random = new Random();
 	int n = 1000;
 
