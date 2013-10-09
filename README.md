@@ -115,6 +115,8 @@ The code for this can be [found on Github](https://github.com/alexec/thread-jigg
 
 Further Reading
 ---
+I've written [a post on testing threaded code for correctnes](http://www.alexecollins.com/content/5-tips-unit-testing-threaded-code). You may also wish to read more generally:
+
 * [Concurrent Bug Patterns and How to Test Them - Eitan Farchi, Yarden Nir, Shmuel Ur IBM Haifa Research Labs](ftp://ftp.cs.umanitoba.ca/pub/IPDPS03/DATA/W20_PADTD_02.PDF)
 * [A presentation describing the difficulty of testing and debugging concurrent software - Shmuel Ur](http://www.almaden.ibm.com/laborday/haifa/projects/verification/contest/papers/testingConcurrentJune2008ForMS.pdf)
 * [Java theory and practice: Characterizing thread safety](http://www.ibm.com/developerworks/java/library/j-jtp09263/index.html)
